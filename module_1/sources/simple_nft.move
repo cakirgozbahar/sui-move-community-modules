@@ -1,5 +1,5 @@
 module module_1::simple_nft {
-    public struct SimpleNFT has key {
+    public struct SimpleNFT has key, store {
         id: UID,
         name: std::ascii::String,
         description: std::string::String,
@@ -36,6 +36,7 @@ module module_1::simple_nft {
         transfer::public_transfer(display, ctx.sender());
     }
 
+    #[allow(lint(self_transfer))]
     public fun create_simple_nft(name: std::ascii::String, ctx: &mut TxContext) {
         let simple_nft = SimpleNFT {
             id: object::new(ctx),
