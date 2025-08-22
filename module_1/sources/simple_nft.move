@@ -1,9 +1,11 @@
 module module_1::simple_nft {
+    use std::string::String;
+    
     public struct SimpleNFT has key, store {
         id: UID,
-        name: std::ascii::String,
-        description: std::string::String,
-        image_url: std::string::String,
+        name: String,
+        description: String,
+        image_url: String,
     }
 
     public struct SIMPLE_NFT has drop {}
@@ -37,7 +39,7 @@ module module_1::simple_nft {
     }
 
     #[allow(lint(self_transfer))]
-    public fun create_simple_nft(name: std::ascii::String, ctx: &mut TxContext) {
+    public entry fun create_simple_nft(name: String, ctx: &mut TxContext) {
         let simple_nft = SimpleNFT {
             id: object::new(ctx),
             name: name,
