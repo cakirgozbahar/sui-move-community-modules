@@ -1,0 +1,25 @@
+name: Move Tests
+
+on:
+  push:
+    branches:
+      - main
+      - '**'  # Run on all branches
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Move
+        run: |
+          curl -sSfL https://raw.githubusercontent.com/move-language/move/main/scripts/install.sh | sh
+
+      - name: Build Move project
+        run: move build
+
+      - name: Run Move tests
+        run: move test
