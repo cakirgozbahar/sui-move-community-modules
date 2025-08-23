@@ -14,12 +14,18 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Set up Move
+      - name: Install Homebrew
         run: |
-          curl -sSfL https://raw.githubusercontent.com/move-language/move/main/scripts/install.sh | sh
+          /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+          echo "/home/linuxbrew/.linuxbrew/bin" >> $GITHUB_PATH
 
+      - name: Install Sui using Homebrew
+        run: brew install sui
+      
       - name: Build Move project
-        run: move build
+        run: sui move build
+        working-directory: ./module_1
 
       - name: Run Move tests
-        run: move test
+        run: sui move test
+        working-directory: ./module_1
