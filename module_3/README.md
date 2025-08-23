@@ -137,6 +137,7 @@ Helpful Sui modules you’ll likely use: `sui::object`, `sui::transfer`, `sui::c
   - In `list_hero`, initialize with `object::new(ctx)`, set `seller` to `ctx.sender()`, and share the object.
 
 - **buy_hero**:
+  - Deconstruct the `list_hero` object.
   - Assert `coin::value(&coin) == price`.
   - Transfer the SUI `coin` to `seller` and the `Hero` to the buyer (sender).
   - Properly remove/destroy the `ListHero` once the purchase completes.

@@ -63,7 +63,8 @@ module module_3::hero;
         
     }
 
-    public entry fun buy_hero(list_hero: &mut ListHero, coin: Coin<SUI>) {
+    public entry fun buy_hero(list_hero: ListHero, coin: Coin<SUI>, ctx: &mut TxContext) {
+        // TODO: Deconstruct the ListHero object
         // TODO: Assert the price of the Hero is equal to the coin amount
         // TODO: Transfer the coin to the seller
         // TODO: Transfer the Hero object to the sender
@@ -72,6 +73,24 @@ module module_3::hero;
 
     public entry fun transfer_hero(hero: Hero, to: address) {
         transfer::public_transfer(hero, to);
+    }
+
+    // ========= GETTER FUNCTIONS =========
+    
+    public fun hero_name(hero: &Hero): String {
+        hero.name
+    }
+
+    public fun hero_image_url(hero: &Hero): String {
+        hero.image_url
+    }
+
+    public fun hero_power(hero: &Hero): u64 {
+        hero.power
+    }
+
+    public fun hero_id(hero: &Hero): ID {
+        object::id(hero)
     }
 
 
