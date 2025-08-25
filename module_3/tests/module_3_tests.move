@@ -25,8 +25,8 @@ module module_3::module_3_tests {
         // Create a hero
         {
             hero::create_hero(
-                string::utf8(b"Ali"),
-                string::utf8(b"https://example.com/ali.png"),
+                b"Ali".to_string(),
+                b"https://example.com/ali.png".to_string(),
                 9000,
                 scenario.ctx(),
             );
@@ -41,9 +41,9 @@ module module_3::module_3_tests {
         {
             let hero = ts::take_from_sender<Hero>(&scenario);
             // Test getter functions
-            assert!(hero::hero_name(&hero) == string::utf8(b"Ali"), EHeroNameMismatch);
-            assert!(hero::hero_image_url(&hero) == string::utf8(b"https://example.com/ali.png"), EHeroImageUrlMismatch);
-            assert!(hero::hero_power(&hero) == 9000, EHeroPowerMismatch);
+            assert!(hero.hero_name() == b"Ali".to_string(), EHeroNameMismatch);
+            assert!(hero.hero_image_url() == b"https://example.com/ali.png".to_string(), EHeroImageUrlMismatch);
+            assert!(hero.hero_power() == 9000, EHeroPowerMismatch);
             ts::return_to_sender(&scenario, hero);
         };
 
@@ -57,8 +57,8 @@ module module_3::module_3_tests {
         // Create a hero first
         {
             hero::create_hero(
-                string::utf8(b"Serkan"),
-                string::utf8(b"https://example.com/serkan.png"),
+                b"Serkan".to_string(),
+                b"https://example.com/serkan.png".to_string(),
                 8500,
                 scenario.ctx(),
             );
@@ -88,8 +88,8 @@ module module_3::module_3_tests {
         // Create a hero first
         {
             hero::create_hero(
-                string::utf8(b"Mantas"),
-                string::utf8(b"https://example.com/mantas.png"),
+                b"Mantas".to_string(),
+                b"https://example.com/mantas.png".to_string(),
                 7500,
                 scenario.ctx(),
             );
@@ -119,8 +119,8 @@ module module_3::module_3_tests {
         // Create and list a hero
         {
             hero::create_hero(
-                string::utf8(b"Teo"),
-                string::utf8(b"https://example.com/teo.png"),
+                b"Teo".to_string(),
+                b"https://example.com/teo.png".to_string(),
                 6000,
                 scenario.ctx(),
             );
@@ -151,8 +151,8 @@ module module_3::module_3_tests {
         
         {
             let hero = ts::take_from_address<Hero>(&scenario, RECIPIENT);
-            assert!(hero::hero_name(&hero) == string::utf8(b"Teo"), EHeroNameMismatch);
-            assert!(hero::hero_power(&hero) == 6000, EHeroPowerMismatch);
+            assert!(hero.hero_name() == b"Teo".to_string(), EHeroNameMismatch);
+            assert!(hero.hero_power() == 6000, EHeroPowerMismatch);
             ts::return_to_address(RECIPIENT, hero);
         };
 
